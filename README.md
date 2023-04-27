@@ -14,3 +14,19 @@ obj.fetch_token
 obj.fetch_task
 obj.send_answer 'lorem ipsum'
 ```
+
+# Moderation
+
+Class that verifies if given prompt is disallowed by OpenAI
+
+```
+irb -r ./moderation.rb
+```
+
+Example usage:
+```ruby
+obj = Moderation.new(api_key: '2356547858dfghfdgh23453')
+obj.call('test_string')
+# true / false
+````
+
