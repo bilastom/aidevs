@@ -1,4 +1,3 @@
-require 'httparty'
 require 'json'
 require './http_caller'
 
@@ -30,7 +29,7 @@ class TaskTool
     return if not_exists?('token')
 
     url = "#{URL}/task/#{@token}"
-    response = HttpCaller.make_get_request(url)
+    response = HttpCaller.make_get_request(url).parsed_response
     puts response
 
     @task = response['msg'] if response['code'] == 0
@@ -42,7 +41,7 @@ class TaskTool
     url = "#{URL}/answer/#{@token}"
     body = { answer: }.to_json
 
-    response =  HttpCaller.make_post_request(url, body)
+    response =  HttpCaller.make_post_request(url, body).parsed_response
     puts response
   end
 
