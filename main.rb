@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+require './http_caller'
 
 # Simple class responsible for authorizing, fething exercises and sending solutions from the aidevs.pl course
 # 
@@ -19,7 +20,7 @@ class TaskTool
   def fetch_token
     url = "#{URL}/token/#{@task_name}"
     body = { apikey: @api_key }.to_json
-    response = make_post(url, body)
+    response = HttpCaller.make_post_request(url, body)
     puts response
 
     @token = response['token'] if response['code'] == 0
@@ -29,7 +30,7 @@ class TaskTool
     return if not_exists?('token')
 
     url = "#{URL}/task/#{@token}"
-    response = make_get(url)
+    response = HttpCaller.make_get_request(url)
     puts response
 
     @task = response['msg'] if response['code'] == 0
@@ -41,21 +42,11 @@ class TaskTool
     url = "#{URL}/answer/#{@token}"
     body = { answer: }.to_json
 
-    response = make_post(url, body)
+    response =  HttpCaller.make_post_request(url, body)
     puts response
   end
 
   private
-
-  def make_get(url)
-    puts "Making GET to #{url}"
-    HTTParty.get(url).parsed_response
-  end
-
-  def make_post(url, body)
-    puts "Making POST to #{url} with body: #{body}"
-    HTTParty.post(url, body: body).parsed_response
-  end
 
   def not_exists?(variable)
     unless self.instance_variable_defined?("@#{variable}")
