@@ -1,18 +1,19 @@
 require 'json'
+require 'yaml'
 require './http_caller'
 
 # Simple class responsible for authorizing, fething exercises and sending solutions from the aidevs.pl course
 # 
 # Example usage:
-#   obj = TaskTool.new('34534665-dfdg-665-436fg-5346dgffg', 'helloapi')
+#   obj = TaskTool.new('helloapi')
 #   obj.fetch_token
 #   obj.fetch_task
 #   obj.send_answer 'lorem ipsum'
 class TaskTool
   URL = 'https://zadania.aidevs.pl'
 
-  def initialize(api_key, task_name)
-    @api_key = api_key
+  def initialize(task_name)
+    @api_key = YAML.load_file('config.yml')['aidevs'].transform_keys(&:to_sym)[:api_key]
     @task_name = task_name
   end
 
@@ -26,7 +27,7 @@ class TaskTool
   end
 
   def fetch_task
-    return if not_exists?('token')
+    fetch_token if not_exists?('token')
 
     url = "#{URL}/task/#{@token}"
     response = HttpCaller.make_get_request(url).parsed_response
