@@ -33,7 +33,7 @@ class TaskTool
     response = HttpCaller.make_get_request(url).parsed_response
     puts response
 
-    @task = response['msg'] if response['code'] == 0
+    @task = response if response['code'] == 0
   end
 
   def send_answer(answer)
