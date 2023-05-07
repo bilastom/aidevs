@@ -1,5 +1,5 @@
 require 'yaml'
-require './http_caller'
+require './lib/http_caller'
 require './lib/filter_accents'
 
 # Class performs chat completion requests

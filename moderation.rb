@@ -1,4 +1,4 @@
-require './http_caller'
+require './lib/http_caller'
 
 # Class that verifies if given prompt is disallowed by OpenAI
 class Moderation

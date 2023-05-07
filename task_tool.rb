@@ -1,6 +1,6 @@
 require 'json'
 require 'yaml'
-require './http_caller'
+require './lib/http_caller'
 
 # Simple class responsible for authorizing, fething exercises and sending solutions from the aidevs.pl course
 # 
