@@ -1,5 +1,6 @@
 require 'yaml'
 require './http_caller'
+require './lib/filter_accents'
 
 # Class performs chat completion requests
 # Configuration is loaded from ./config.yml
@@ -11,7 +12,8 @@ class Completion
   end
 
   def call(content)
-    response = HttpCaller.make_post_request(url, body(content), headers)
+    filtered_content = FilterAccents.for(content)
+    response = HttpCaller.make_post_request(url, body(filtered_content), headers)
 
     total_tokens = response.parsed_response.dig('usage', 'total_tokens')
     puts "Used: #{total_tokens} tokens"
