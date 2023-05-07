@@ -1,17 +1,32 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (7.0.4.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    concurrent-ruby (1.2.2)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    i18n (1.13.0)
+      concurrent-ruby (~> 1.0)
     mini_mime (1.1.2)
+    minitest (5.18.0)
     multi_xml (0.6.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    yaml (0.2.1)
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
 
 DEPENDENCIES
+  activesupport (~> 7.0, >= 7.0.4.3)
   httparty
+  yaml
 
 BUNDLED WITH
    2.4.5
