@@ -1,5 +1,5 @@
 require './completion'
-require './main'
+require './task_tool'
 
 
 class Inprompt

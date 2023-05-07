@@ -4,7 +4,7 @@ A simple Ruby script for authorizing, fetching exercises and sending solutions f
 The script can be executed in irb
 
 ```
-irb -r ./main.rb
+irb -r ./task_tool.rb
 ```
 
 Example usage:
