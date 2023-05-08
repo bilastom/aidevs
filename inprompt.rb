@@ -1,9 +1,12 @@
 require './completion'
 require './task_tool'
 
-
+# Using the task verification module from the API, retrieve the knowledge base for the task named "inprompt",
+# and then answer the question located in the 'question' field.
+# The base is too large to be used directly in your query.
+# You must come up with any method for searching it based on the name of the person the question returned by the API refers to.
 class Inprompt
-  def initialize(send_answer: false)
+  def initialize
     @task_tool = TaskTool.new('inprompt')
     @completion = Completion.new
   end
@@ -15,7 +18,7 @@ class Inprompt
 
     answer = completion.call(answer_prompt)
     puts "OpenAI answer: #{answer}"
-    task_tool.send_answer(answer) if send_answer
+    task_tool.send_answer(answer)
   end
 
   private

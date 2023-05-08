@@ -3,9 +3,9 @@ aidevs:
   api_key:
 openai:
   api_key:
+  completion_url: https://api.openai.com/v1/chat/completions
   model: gpt-3.5-turbo
   max_tokens: 60
   role: system
   temperature: 0.1
   
-
