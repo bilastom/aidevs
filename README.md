@@ -11,7 +11,6 @@ Example usage:
 ```ruby
 obj = TaskTool.new('34534665-dfdg-665-436fg-5346dgffg', 'helloapi')
 obj.fetch_token
-obj.fetch_task
 obj.send_answer 'lorem ipsum'
 ```
 
