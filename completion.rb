@@ -5,25 +5,25 @@ require './lib/filter_accents'
 # Class performs chat completion requests
 # Configuration is loaded from ./config.yml
 class Completion
-  def initialize(config: {})
-    @url = 'https://api.openai.com/v1/chat/completions'
+  def initialize(params: {})
     @config = YAML.load_file('config.yml')['openai_api'].transform_keys(&:to_sym)
-    @config.merge(config)
+    @config.merge(params)
   end
 
   def call(content)
     filtered_content = FilterAccents.for(content)
-    response = HttpCaller.make_post_request(url, body(filtered_content), headers)
+    response = HttpCaller.make_post_request(config[:completion_url], body(filtered_content), headers)
+    parsed_response = JSON.parse(response.parsed_response)
 
-    total_tokens = response.parsed_response.dig('usage', 'total_tokens')
+    total_tokens = parsed_response.dig('usage', 'total_tokens')
     puts "Used: #{total_tokens} tokens"
-
-    response.parsed_response['choices'].first.dig('message', 'content')
+    
+    parsed_response['choices'].first.dig('message', 'content')
   end
 
   private
 
-  attr_reader :config, :url
+  attr_reader :config
 
   def body(content)
     {
